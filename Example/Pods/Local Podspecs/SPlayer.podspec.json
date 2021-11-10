@@ -1,0 +1,22 @@
+{
+  "name": "SPlayer",
+  "version": "0.1.0",
+  "summary": "A short description of SPlayer.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/levine_hhb@163.com/SPlayer",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "levine_hhb@163.com": "levine_hhb@163.com"
+  },
+  "source": {
+    "git": "https://github.com/levine_hhb@163.com/SPlayer.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "SPlayer/Classes/**/*"
+}

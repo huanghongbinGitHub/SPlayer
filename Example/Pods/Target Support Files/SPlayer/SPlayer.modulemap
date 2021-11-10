@@ -1,0 +1,6 @@
+framework module SPlayer {
+  umbrella header "SPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}

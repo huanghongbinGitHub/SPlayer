@@ -1,0 +1,27 @@
+PODS:
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - SPlayer (0.1.0)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase
+  - SPlayer (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - FBSnapshotTestCase
+
+EXTERNAL SOURCES:
+  SPlayer:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  SPlayer: 37eb83f8499a738a8d38adc56416aabcdcf011a4
+
+PODFILE CHECKSUM: a3007989d388a30e6c607f126b16e21d6a0b6eab
+
+COCOAPODS: 1.9.3
