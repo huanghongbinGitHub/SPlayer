@@ -13,6 +13,7 @@
 #import "NSString+SULoader.h"
 #import "NSURL+SULoader.h"
 #import "SULoaderCategory.h"
+#import "ResourceLoader.h"
 #import "SUFileHandle.h"
 #import "SURequestTask.h"
 #import "SUResourceLoader.h"

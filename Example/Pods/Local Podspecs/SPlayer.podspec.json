@@ -12,11 +12,16 @@
     "levine_hhb@163.com": "levine_hhb@163.com"
   },
   "source": {
-    "git": "https://github.com/levine_hhb@163.com/SPlayer.git",
+    "git": "https://github.com/huanghongbinGitHub/SPlayer.git",
     "tag": "0.1.0"
   },
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "SPlayer/Classes/**/*"
+  "source_files": "SPlayer/Classes/**/*",
+  "resource_bundles": {
+    "SPlayer": [
+      "SPlayer/Assets/*.png"
+    ]
+  }
 }
