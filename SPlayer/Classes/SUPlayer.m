@@ -18,12 +18,15 @@
 @property (nonatomic, strong) SUResourceLoader * resourceLoader;
 
 @property (nonatomic, strong) id timeObserve;
+
 @property (nonatomic, strong) SPlayerControlView *controlView;
 
 @end
 
 
 @implementation SUPlayer
+
+//@synthesize back = _back;
 
 - (instancetype)initWithURL:(NSURL *)url {
     if (self == [super init]) {
@@ -33,10 +36,10 @@
     return self;
 }
 
-
-- (instancetype)initWithURL:(NSURL *)url withSuperView:(UIView *)view{
+- (instancetype)initWithURL:(NSURL *)url withFrame:(CGRect)frame{
     if (self == [super init]) {
         self.url = url;
+        [self setBack:[[UIView alloc] initWithFrame:frame]];
         [self reloadCurrentItem];
     }
     return self;
@@ -69,7 +72,6 @@
     self.player = [AVPlayer playerWithPlayerItem:self.currentItem];
     self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioSessionInterrupted:) name:AVAudioSessionInterruptionNotification object:nil];
-    NSLog(@"self.player : %@",self.player);
     //Observer
     [self addObserver];
     
@@ -80,6 +82,12 @@
 - (void)replaceItemWithURL:(NSURL *)url {
     self.url = url;
     [self reloadCurrentItem];
+}
+
+- (void)addToSuperView:(UIView *)view{
+    if (self.back) {
+        [view addSubview:self.back];
+    }
 }
 
 
@@ -218,6 +226,14 @@
 }
 
 #pragma mark - Property Set
+
+- (void)setMuted:(BOOL)muted{
+    _muted = muted;
+    if (self.player) {
+        self.player.muted = muted;
+    }
+}
+
 - (void)setProgress:(CGFloat)progress {
     [self willChangeValueForKey:@"progress"];
     _progress = progress;
@@ -327,6 +343,7 @@
     }
     CMTime dragedCMTime = CMTimeMake(currentTime, 1);
     [self.player seekToTime:dragedCMTime toleranceBefore:CMTimeMake(1,1) toleranceAfter:CMTimeMake(1,1) completionHandler:^(BOOL finished) {
+        
     }];
 }
 
@@ -364,6 +381,7 @@
     }
 }
 
+
 - (SPlayerControlView *)controlView{
     if (!_controlView) {
         _controlView = [[SPlayerControlView alloc] initWithFrame:self.back.bounds];
@@ -382,6 +400,18 @@
         };
     }
     return _controlView;
+}
+
+- (void)dealloc{
+    NSLog(@"aplayer dealloc");
+    [self removeObserver];
+    [self.layer removeFromSuperlayer];
+    
+}
+
+- (void)diss{
+    [self removeObserver];
+
 }
 
 @end

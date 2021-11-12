@@ -143,4 +143,17 @@
     }
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch  {
+
+    //点击的view的类名
+    NSLog(@"%@", NSStringFromClass([touch.view class]));
+    // UITableViewCellContentView就是点击了tableViewCell，则不截获点击事件
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]){
+        
+        return NO;
+    }
+    return  YES;
+}
+
+
 @end

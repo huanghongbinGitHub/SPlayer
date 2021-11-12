@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27F50C36273CDD5000ECE1C9 /* AutoPlayTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F50C35273CDD5000ECE1C9 /* AutoPlayTableController.m */; };
+		27F50C3B273CE42800ECE1C9 /* PlayUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F50C3A273CE42800ECE1C9 /* PlayUIViewController.m */; };
+		27F50C40273CF29D00ECE1C9 /* TestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F50C3F273CF29D00ECE1C9 /* TestDelegate.m */; };
+		27F50C45273CFAD300ECE1C9 /* AutoPlayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F50C44273CFAD300ECE1C9 /* AutoPlayTableViewCell.m */; };
 		46DE1F7E63052F79497DB9B5 /* Pods_SPlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD3D7053F25E517C0C6D961 /* Pods_SPlayer_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -37,6 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27F50C34273CDD5000ECE1C9 /* AutoPlayTableController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoPlayTableController.h; sourceTree = "<group>"; };
+		27F50C35273CDD5000ECE1C9 /* AutoPlayTableController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoPlayTableController.m; sourceTree = "<group>"; };
+		27F50C39273CE42800ECE1C9 /* PlayUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayUIViewController.h; sourceTree = "<group>"; };
+		27F50C3A273CE42800ECE1C9 /* PlayUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayUIViewController.m; sourceTree = "<group>"; };
+		27F50C3E273CF29D00ECE1C9 /* TestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestDelegate.h; sourceTree = "<group>"; };
+		27F50C3F273CF29D00ECE1C9 /* TestDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestDelegate.m; sourceTree = "<group>"; };
+		27F50C43273CFAD300ECE1C9 /* AutoPlayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoPlayTableViewCell.h; sourceTree = "<group>"; };
+		27F50C44273CFAD300ECE1C9 /* AutoPlayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoPlayTableViewCell.m; sourceTree = "<group>"; };
+		27F50C48273E2F3800ECE1C9 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		2BD3D7053F25E517C0C6D961 /* Pods_SPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C150339448D891252566244 /* Pods-SPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPlayer_Tests.release.xcconfig"; path = "Target Support Files/Pods-SPlayer_Tests/Pods-SPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		58E75EB72435FB484B05E147 /* Pods-SPlayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPlayer_Example.debug.xcconfig"; path = "Target Support Files/Pods-SPlayer_Example/Pods-SPlayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +150,15 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* SPLAYERViewController.h */,
 				6003F5A6195388D20070C39A /* SPLAYERViewController.m */,
+				27F50C39273CE42800ECE1C9 /* PlayUIViewController.h */,
+				27F50C3A273CE42800ECE1C9 /* PlayUIViewController.m */,
+				27F50C34273CDD5000ECE1C9 /* AutoPlayTableController.h */,
+				27F50C35273CDD5000ECE1C9 /* AutoPlayTableController.m */,
+				27F50C43273CFAD300ECE1C9 /* AutoPlayTableViewCell.h */,
+				27F50C44273CFAD300ECE1C9 /* AutoPlayTableViewCell.m */,
+				27F50C3E273CF29D00ECE1C9 /* TestDelegate.h */,
+				27F50C3F273CF29D00ECE1C9 /* TestDelegate.m */,
+				27F50C48273E2F3800ECE1C9 /* Constant.h */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -383,9 +405,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F50C40273CF29D00ECE1C9 /* TestDelegate.m in Sources */,
 				6003F59E195388D20070C39A /* SPLAYERAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SPLAYERViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				27F50C3B273CE42800ECE1C9 /* PlayUIViewController.m in Sources */,
+				27F50C36273CDD5000ECE1C9 /* AutoPlayTableController.m in Sources */,
+				27F50C45273CFAD300ECE1C9 /* AutoPlayTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,8 +15,11 @@
 @interface SUPlayer : NSObject<SULoaderDelegate>
 
 @property (nonatomic, assign) SUPlayerState state;
+
 @property (nonatomic, assign) CGFloat progress;
+
 @property (nonatomic, assign) CGFloat duration;
+
 @property (nonatomic, assign) CGFloat cacheProgress;
 
 @property (nonatomic, strong) UIView *back;
@@ -24,13 +27,20 @@
 //Whether or not skin is included
 @property (nonatomic, assign) BOOL skin;
 
+@property (nonatomic, assign) BOOL muted;
+
+@property (nonatomic, assign) CGRect frame;
+
 /**
  *  初始化方法，url：歌曲的网络地址或者本地地址
  */
 - (instancetype)initWithURL:(NSURL *)url;
 
 
-- (instancetype)initWithURL:(NSURL *)url withSuperView:(UIView *)view;
+- (instancetype)initWithURL:(NSURL *)url withFrame:(CGRect)frame;
+
+
+- (void)addToSuperView:(UIView *)view;
 
 /**
  *  播放下一首歌曲，url：歌曲的网络地址或者本地地址
@@ -78,5 +88,8 @@
  */
 + (BOOL)clearCache;
 
+- (void)removeObserver;
+
+- (void)diss;
 
 @end
