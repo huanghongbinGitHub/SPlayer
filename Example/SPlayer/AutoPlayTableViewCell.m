@@ -32,11 +32,15 @@
 }
 
 - (void)configPlayerWithUrl:(NSString *)url{
-    self.player = [[SUPlayer alloc] initWithURL:[NSURL URLWithString:url]];
-    self.player.skin = YES;
-    UIView *view  = [[UIView alloc] initWithFrame:CGRectMake(10, 0, self.rectInSuper.size.width - 20, 290)];
-    self.player.back = view;
-    [self.contentView addSubview:view];
+//    self.player = [[SUPlayer alloc] initWithURL:[NSURL URLWithString:url]];
+//    self.player.skin = YES;
+//    UIView *view  = [[UIView alloc] initWithFrame:CGRectMake(10, 0, self.rectInSuper.size.width - 20, 290)];
+//    self.player.back = view;
+//    [self.contentView addSubview:view];
+    
+    self.player = [[SUPlayer alloc] initWithURL:[NSURL URLWithString:url] withFrame:CGRectMake(10, 0, self.rectInSuper.size.width - 20, 290)];
+    [self.player setSkin:YES];
+    [self.player addToSuperView:self.contentView];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
@@ -70,7 +74,7 @@
 
 
 /*
-    当此cell处于屏幕上方 y0~yx的范围内，就变成黄色，出去之后变成绿色
+    当此cell处于屏幕上方 y0~yx的范围内，
  */
 - (void)isInRectOfHeight:(CGFloat)height atContentOfSet:(CGPoint)ofset{
     /*

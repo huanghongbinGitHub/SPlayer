@@ -39,8 +39,8 @@
 - (instancetype)initWithURL:(NSURL *)url withFrame:(CGRect)frame{
     if (self == [super init]) {
         self.url = url;
-        [self setBack:[[UIView alloc] initWithFrame:frame]];
         [self reloadCurrentItem];
+        [self setBack:[[UIView alloc] initWithFrame:frame]];
     }
     return self;
 }
@@ -347,38 +347,37 @@
     }];
 }
 
+- (void)setSkin:(BOOL)skin{
+    _skin = skin;
+    if (skin) {
+        [self.back addSubview:self.controlView];
+        self.controlView.state = self.state;
+        __weak typeof(self) wsf = self;
+        [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1, 1)
+                                                  queue:dispatch_get_main_queue()
+                                             usingBlock:^(CMTime time) {
+            typeof(wsf) __strong ssf = wsf;
+            NSArray *loadRanges = ssf.currentItem.seekableTimeRanges;
+            if (loadRanges.count > 0 && ssf.currentItem.duration.timescale != 0) {
+                CGFloat currentTime = CMTimeGetSeconds([ssf.currentItem currentTime]);
+                CGFloat totalTime     = (CGFloat)ssf.currentItem.duration.value / ssf.currentItem.duration.timescale;
+                float value = currentTime / totalTime;
+                if (value < ssf.controlView.playSlider.value) {
+                    //                        NSLog(@"cxcx");
+                }
+                if (!ssf.controlView.sliding) {
+                    ssf.controlView.playSlider.value = value;
+                }
+            }
+        }];
+    }
+}
 
 /// MARK: -------------view set get -----------
 - (void)setBack:(UIView *)back{
     _back = back;
     [back.layer addSublayer:self.layer];
     self.layer.frame = back.bounds;
-    if (self.skin) {
-        //add skin
-        if (self.controlView) {
-            [back addSubview:self.controlView];
-            self.controlView.state = self.state;
-            __weak typeof(self) wsf = self;
-            [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1, 1)
-                                                      queue:dispatch_get_main_queue()
-                                                 usingBlock:^(CMTime time) {
-                typeof(wsf) __strong ssf = wsf;
-                NSArray *loadRanges = ssf.currentItem.seekableTimeRanges;
-                if (loadRanges.count > 0 && ssf.currentItem.duration.timescale != 0) {
-                    CGFloat currentTime = CMTimeGetSeconds([ssf.currentItem currentTime]);
-                    CGFloat totalTime     = (CGFloat)ssf.currentItem.duration.value / ssf.currentItem.duration.timescale;
-                    float value = currentTime / totalTime;
-                    if (value < ssf.controlView.playSlider.value) {
-                        //                        NSLog(@"cxcx");
-                    }
-                    NSLog(@"实际几秒播放 %@",@(currentTime));
-                    if (!ssf.controlView.sliding) {
-                        ssf.controlView.playSlider.value = value;
-                    }
-                }
-            }];
-        }
-    }
 }
 
 
