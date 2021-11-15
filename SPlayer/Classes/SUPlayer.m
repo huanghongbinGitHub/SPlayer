@@ -12,9 +12,13 @@
 @interface SUPlayer ()
 
 @property (nonatomic, strong) NSURL * url;
+
 @property (nonatomic, strong) AVPlayer * player;
+
 @property (nonatomic, strong) AVPlayerLayer *layer;
+
 @property (nonatomic, strong) AVPlayerItem * currentItem;
+
 @property (nonatomic, strong) SUResourceLoader * resourceLoader;
 
 @property (nonatomic, strong) id timeObserve;
@@ -296,15 +300,10 @@
 }
 
 - (void)skinSliderToValue:(float)value{
-    NSLog(@"thread %@",[NSThread currentThread]);
-    NSLog(@"滑动value%@",@(value));
-    NSLog(@"f %@",@(value));
     // 视频总时间长度
     CGFloat total = (CGFloat)self.currentItem.duration.value / self.currentItem.duration.timescale;
-    NSLog(@"视频总长度为%@",@(total));
     //计算出拖动的当前秒数
     double dragedSeconds = round(total * value);
-    NSLog(@"移动到 几秒播放 %@",@(dragedSeconds));
     // 转换成CMTime才能给player来控制播放进度
     CMTime dragedCMTime = CMTimeMake(dragedSeconds, 1); //kCMTimeZero
     //    [self.player seekToTime:dragedCMTime toleranceBefore:CMTimeMake(1,1) toleranceAfter:CMTimeMake(1,1)];
@@ -321,7 +320,6 @@
  */
 - (void)playBackWithTime:(float)second{
         Float64 currentTime = CMTimeGetSeconds([self.player currentTime]);
-        NSLog(@"当前播放时间dian %@",@(currentTime));
         CGFloat total = (CGFloat)self.currentItem.duration.value / self.currentItem.duration.timescale;
         currentTime -= second;
         if (currentTime <= 0) {
@@ -335,7 +333,6 @@
 - (void)playForwardWithTime:(float)second{
     
     Float64 currentTime = CMTimeGetSeconds([self.player currentTime]);
-    NSLog(@"当前播放时间dian %@",@(currentTime));
     CGFloat total = (CGFloat)self.currentItem.duration.value / self.currentItem.duration.timescale;
     currentTime += second;
     if (currentTime <= 0) {
@@ -350,6 +347,7 @@
 - (void)setSkin:(BOOL)skin{
     _skin = skin;
     if (skin) {
+        NSAssert(self.back, @"No back view，can not add skin");
         [self.back addSubview:self.controlView];
         self.controlView.state = self.state;
         __weak typeof(self) wsf = self;

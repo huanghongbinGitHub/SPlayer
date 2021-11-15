@@ -33,9 +33,9 @@
 
 - (void)configPlayerWithUrl:(NSString *)url{
 //    self.player = [[SUPlayer alloc] initWithURL:[NSURL URLWithString:url]];
-//    self.player.skin = YES;
 //    UIView *view  = [[UIView alloc] initWithFrame:CGRectMake(10, 0, self.rectInSuper.size.width - 20, 290)];
 //    self.player.back = view;
+//    self.player.skin = YES;
 //    [self.contentView addSubview:view];
     
     self.player = [[SUPlayer alloc] initWithURL:[NSURL URLWithString:url] withFrame:CGRectMake(10, 0, self.rectInSuper.size.width - 20, 290)];
