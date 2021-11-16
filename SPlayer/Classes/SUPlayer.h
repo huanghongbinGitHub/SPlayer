@@ -88,8 +88,7 @@
  */
 + (BOOL)clearCache;
 
-- (void)removeObserver;
 
-- (void)diss;
+- (void)removeObserver;
 
 @end

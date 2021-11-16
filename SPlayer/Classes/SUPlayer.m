@@ -167,12 +167,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackFinished) name:AVPlayerItemDidPlayToEndTimeNotification object:songItem];
     //播放进度
     __weak typeof(self) weakSelf = self;
-    self.timeObserve = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, 1.0) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
-        CGFloat current = CMTimeGetSeconds(time);
-        CGFloat total = CMTimeGetSeconds(songItem.duration);
-        weakSelf.duration = total;
-        weakSelf.progress = current / total;
-    }];
+//    self.timeObserve = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, 1.0) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+//        CGFloat current = CMTimeGetSeconds(time);
+//        CGFloat total = CMTimeGetSeconds(songItem.duration);
+//        weakSelf.duration = total;
+//        weakSelf.progress = current / total;
+//    }];
     [self.player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:nil];
     [songItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
     [songItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
@@ -351,7 +351,7 @@
         [self.back addSubview:self.controlView];
         self.controlView.state = self.state;
         __weak typeof(self) wsf = self;
-        [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1, 1)
+        self.timeObserve = [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1, 1)
                                                   queue:dispatch_get_main_queue()
                                              usingBlock:^(CMTime time) {
             typeof(wsf) __strong ssf = wsf;
@@ -382,7 +382,7 @@
 - (SPlayerControlView *)controlView{
     if (!_controlView) {
         _controlView = [[SPlayerControlView alloc] initWithFrame:self.back.bounds];
-        __block SUPlayer *bs = self;
+        __weak SUPlayer *bs = self;
         _controlView.playSliderToValue = ^(float value) {
             [bs skinSliderToValue:value];
         };
@@ -401,14 +401,9 @@
 
 - (void)dealloc{
     NSLog(@"aplayer dealloc");
-    [self removeObserver];
-    [self.layer removeFromSuperlayer];
-    
-}
-
-- (void)diss{
-    [self removeObserver];
-
+    [self stop];
+//    [self.layer removeFromSuperlayer];
+//    [self removeObserver];
 }
 
 @end

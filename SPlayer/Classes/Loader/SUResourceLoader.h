@@ -27,6 +27,8 @@
 
 @interface SUResourceLoader : NSObject<AVAssetResourceLoaderDelegate,SURequestTaskDelegate>
 
+@property (nonatomic, strong) NSString *fileCachePath;
+
 @property (nonatomic, weak) id<SULoaderDelegate> delegate;
 @property (atomic, assign) BOOL seekRequired; //Seek标识
 @property (nonatomic, assign) BOOL cacheFinished;

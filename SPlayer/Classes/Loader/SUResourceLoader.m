@@ -158,4 +158,9 @@
     return NO;
 }
 
+- (void)dealloc{
+    NSFileManager * manager = [NSFileManager defaultManager];
+    [manager removeItemAtPath:self.requestTask.fileCachePath error:nil];
+}
+
 @end

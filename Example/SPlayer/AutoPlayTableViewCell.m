@@ -93,10 +93,9 @@
 }
 
 
-- (void)dealloc{
-    NSLog(@"cell dealloc");
-
-}
+//- (void)dealloc{
+//    NSLog(@"cell dealloc");
+//}
 
 
 @end
