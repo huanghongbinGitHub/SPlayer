@@ -96,7 +96,8 @@
         fileLength = self.requestTask.fileLength;
         self.requestTask.cancel = YES;
     }
-    self.requestTask = [[SURequestTask alloc] initWithUrl:loadingRequest.request.URL];
+    NSString *address = [NSString stringWithFormat:@"%@",self];
+    self.requestTask = [[SURequestTask alloc] initWithUrl:loadingRequest.request.URL withBasePath:address];
 //    self.requestTask = [[SURequestTask alloc] init];
     self.requestTask.requestURL = loadingRequest.request.URL;
     self.requestTask.requestOffset = loadingRequest.dataRequest.requestedOffset;

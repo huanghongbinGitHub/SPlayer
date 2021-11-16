@@ -18,6 +18,17 @@
 
 @implementation SUFileHandle
 
++ (BOOL)createTempFileWithUrl:(NSURL *)url withLoaderAddress:(NSString *)loader{
+    NSFileManager * manager = [NSFileManager defaultManager];
+    NSString *fileNameNoFormate = [NSString fileNameNoFileFormatWithURL:url];
+    fileNameNoFormate = [NSString stringWithFormat:@"%@%@",loader,fileNameNoFormate];
+    NSString * path = [NSString tempFilePathWtihFileName:fileNameNoFormate];
+    if ([manager fileExistsAtPath:path]) {
+        [manager removeItemAtPath:path error:nil];
+    }
+    return [manager createFileAtPath:path contents:nil attributes:nil];
+}
+
 + (BOOL)createTempFileWithUrl:(NSURL *)url {
     NSFileManager * manager = [NSFileManager defaultManager];
     NSString *fileNameNoFormate = [NSString fileNameNoFileFormatWithURL:url];
@@ -38,7 +49,7 @@
 }
 
 + (void)writeTempFileData:(NSData *)data withFilePath:(NSString *)path {
-    NSLog(@"临时目录 ： %@",path);
+    NSLog(@"缓存写入 %@ 长度 %@",path,@(data.length));
     NSFileHandle * handle = [NSFileHandle fileHandleForWritingAtPath:path];
     [handle seekToEndOfFile];   //跳到文件末尾
     [handle writeData:data];
@@ -74,6 +85,7 @@
     NSString * cacheFilePath = [NSString stringWithFormat:@"%@/%@", cacheFolderPath, name];
     BOOL success = [[NSFileManager defaultManager] copyItemAtPath:path toPath:cacheFilePath error:nil];
     NSLog(@"cache file : %@", success ? @"success" : @"fail");
+//    [manager removeItemAtPath:path error:nil];
 }
 
 + (void)cacheTempFileWithFileName:(NSString *)name {

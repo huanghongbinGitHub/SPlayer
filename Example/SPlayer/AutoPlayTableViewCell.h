@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, retain) NSString *identify;   
 
-@property (nonatomic, assign) CGRect displayRect;
-
 @property (nonatomic, assign) CGRect rectInSuper;
 
 - (void)configPlayerWithUrl:(NSString *)url;

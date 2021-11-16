@@ -12,6 +12,7 @@
 
 @interface SUFileHandle : NSObject
 
++ (BOOL)createTempFileWithUrl:(NSURL *)url withLoaderAddress:(NSString *)loader;
 
 + (BOOL)createTempFileWithUrl:(NSURL *)url;
 /**

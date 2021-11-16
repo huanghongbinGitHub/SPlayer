@@ -33,11 +33,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return [self data].count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -65,8 +65,9 @@
 - (NSArray *)data{
     return @[
         @"http://roki.oss-cn-hangzhou.aliyuncs.com/cookbook/video/step/ed554c11-0557-4c48-ad11-d3d4af80cdb8.mp4",
-        @"http://roki.oss-cn-hangzhou.aliyuncs.com/cookbook/video/step/ad924e7e-195d-47c5-ba8c-823ab674533cw1920h1080.mp4"
-        ,@"http://roki.oss-cn-hangzhou.aliyuncs.com/cookbook/video/step/4e1808f5-02ad-4dbd-8241-df1c8c4b8d1ew720h960.mp4"
+        @"http://roki.oss-cn-hangzhou.aliyuncs.com/cookbook/video/step/ed554c11-0557-4c48-ad11-d3d4af80cdb8.mp4"
+//        @"http://roki.oss-cn-hangzhou.aliyuncs.com/cookbook/video/step/ad924e7e-195d-47c5-ba8c-823ab674533cw1920h1080.mp4"
+//        ,@"http://roki.oss-cn-hangzhou.aliyuncs.com/cookbook/video/step/4e1808f5-02ad-4dbd-8241-df1c8c4b8d1ew720h960.mp4"
     ];
 }
 

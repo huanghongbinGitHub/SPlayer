@@ -37,12 +37,19 @@
 @property (nonatomic, assign) BOOL cache; //是否缓存文件
 @property (nonatomic, assign) BOOL cancel; //是否取消请求
 
+@property (nonatomic, retain) NSString *fileName;
+
 @property (nonatomic, strong) NSString *fileCachePath;
+
+@property (nonatomic, retain) NSString *loaderAddress;
+
 /**
  *  开始请求
  */
 - (void)start;
 
 - (instancetype)initWithUrl:(NSURL *)url;
+
+- (instancetype)initWithUrl:(NSURL *)url withBasePath:(NSString *)path;
 
 @end

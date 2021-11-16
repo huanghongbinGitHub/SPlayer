@@ -37,7 +37,7 @@
     CGFloat x = 30;
     for (int i = 0; i < array.count; i++) {
         SUPlayer *player = [[SUPlayer alloc] initWithURL:[NSURL URLWithString:array[i]]];
-        player.skin = YES;
+//        player.skin = YES;
 //        AVPlayerLayer *layer = [AVPlayerLayer
         UIView *view ;
         if (i == 2) {

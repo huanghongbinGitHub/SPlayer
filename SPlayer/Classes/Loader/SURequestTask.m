@@ -33,10 +33,21 @@
     return self;
 }
 
+- (instancetype)initWithUrl:(NSURL *)url withBasePath:(NSString *)path{
+    if (self = [super init]) {
+        self.loaderAddress = path;
+       BOOL b = [SUFileHandle createTempFileWithUrl:url withLoaderAddress:path];
+        NSLog(@"%@",@(b));
+    }
+    return self;
+}
+
 - (void)setRequestURL:(NSURL *)requestURL{
     _requestURL = requestURL;
     NSString *fileNoFormateName = [NSString fileNameNoFileFormatWithURL:requestURL];
-    [self setFileCachePath:[NSString tempFilePathWtihFileName:fileNoFormateName]];
+    self.fileName = fileNoFormateName;
+    NSString *fileCachePath = [NSString stringWithFormat:@"%@%@",self.loaderAddress,fileNoFormateName];
+    [self setFileCachePath:[NSString tempFilePathWtihFileName:fileCachePath]];
 //    _fileCachePath = [NSString fileNameNoFileFormatWithURL:requestURL];
 }
 
