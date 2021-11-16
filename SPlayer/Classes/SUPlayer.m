@@ -11,6 +11,10 @@
 
 @interface SUPlayer ()
 
+{
+    dispatch_queue_t _queue;
+}
+
 @property (nonatomic, strong) NSURL * url;
 
 @property (nonatomic, strong) AVPlayer * player;
@@ -43,6 +47,7 @@
 - (instancetype)initWithURL:(NSURL *)url withFrame:(CGRect)frame{
     if (self == [super init]) {
         self.url = url;
+        _queue =  dispatch_queue_create("video.download", DISPATCH_QUEUE_CONCURRENT);
         [self reloadCurrentItem];
         [self setBack:[[UIView alloc] initWithFrame:frame]];
     }
@@ -64,7 +69,9 @@
             self.resourceLoader.delegate = self;
             
             AVURLAsset * asset = [AVURLAsset URLAssetWithURL:[self.url customSchemeURL] options:nil];
-            [asset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
+            dispatch_queue_t queue = dispatch_queue_create("net.bujige.testQueue", DISPATCH_QUEUE_CONCURRENT);
+//            [asset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
+            [asset.resourceLoader setDelegate:self.resourceLoader queue:_queue];
             self.currentItem = [AVPlayerItem playerItemWithAsset:asset];
             NSLog(@"无缓存，播放网络文件");
         }

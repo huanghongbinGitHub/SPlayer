@@ -28,7 +28,6 @@
 - (instancetype)initWithUrl:(NSURL *)url{
     if (self = [super init]) {
        BOOL b = [SUFileHandle createTempFileWithUrl:url];
-        NSLog(@"%@",@(b));
     }
     return self;
 }
@@ -37,7 +36,6 @@
     if (self = [super init]) {
         self.loaderAddress = path;
        BOOL b = [SUFileHandle createTempFileWithUrl:url withLoaderAddress:path];
-        NSLog(@"%@",@(b));
     }
     return self;
 }
@@ -48,7 +46,6 @@
     self.fileName = fileNoFormateName;
     NSString *fileCachePath = [NSString stringWithFormat:@"%@%@",self.loaderAddress,fileNoFormateName];
     [self setFileCachePath:[NSString tempFilePathWtihFileName:fileCachePath]];
-//    _fileCachePath = [NSString fileNameNoFileFormatWithURL:requestURL];
 }
 
 
@@ -74,7 +71,7 @@
 //服务器响应
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
     if (self.cancel) return;
-    NSLog(@"服务器响应 response: %@",response);
+//    NSLog(@"服务器响应 response: %@",response);
     completionHandler(NSURLSessionResponseAllow);
     NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
     NSString * contentRange = [[httpResponse allHeaderFields] objectForKey:@"Content-Range"];
@@ -89,12 +86,11 @@
 //服务器返回数据 可能会调用多次
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     if (self.cancel) return;
-//    [SUFileHandle writeTempFileData:data];
     if (self.fileCachePath) {
         [SUFileHandle writeTempFileData:data withFilePath:self.fileCachePath];
     }
     self.cacheLength += data.length;
-    NSLog(@"服务器返回数据 %@,%@",@(self.cacheLength),@(data.length));
+//    NSLog(@"服务器返回数据 %@,%@",@(self.cacheLength),@(data.length));
     if (self.delegate && [self.delegate respondsToSelector:@selector(requestTaskDidUpdateCache)]) {
         [self.delegate requestTaskDidUpdateCache];
     }
@@ -102,9 +98,9 @@
 
 //请求完成会调用该方法，请求失败则error有值
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    NSLog(@"服务器请求完成或者失败");
+//    NSLog(@"服务器请求完成或者失败");
     if (self.cancel) {
-        NSLog(@"下载取消");
+//        NSLog(@"下载取消");
     }else {
         if (error) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(requestTaskDidFailWithError:)]) {

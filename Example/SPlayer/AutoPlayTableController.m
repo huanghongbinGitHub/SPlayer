@@ -29,7 +29,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.observer = [NSMutableArray array];
-//    self.navigationController.navigationBar.translucent = NO;
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"CLEAR" style:UIBarButtonItemStylePlain target:self action:@selector(clearCache)];
+//    self.navigationController.navigationItem.rightBarButtonItem = item;
+    [self.navigationItem setRightBarButtonItem:item];
+}
+
+- (void)clearCache{
+    [SUPlayer clearCache];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
