@@ -382,7 +382,16 @@
 - (void)setBack:(UIView *)back{
     _back = back;
     [back.layer addSublayer:self.layer];
+    back.layer.backgroundColor = [UIColor grayColor].CGColor;
     self.layer.frame = back.bounds;
+}
+
+- (void)setRadius:(CGFloat)radius{
+    _radius = radius;
+    if (self.layer) {
+        self.back.layer.cornerRadius = radius;
+        self.back.layer.masksToBounds = YES;
+    }
 }
 
 

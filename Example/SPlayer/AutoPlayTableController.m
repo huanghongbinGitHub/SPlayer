@@ -60,7 +60,8 @@
         [self.observer addObject:cell];
         CGRect rectInTableView = [tableView rectForRowAtIndexPath:indexPath];
         cell.rectInSuper = rectInTableView;
-        cell.backgroundColor = randomColor;
+//        cell.backgroundColor = randomColor;
+        cell.backgroundColor = [UIColor blackColor];
         [cell configPlayerWithUrl:[self data][indexPath.row]];
     }
     if (indexPath.row == 0) {
@@ -115,7 +116,7 @@
     [super viewWillDisappear:animated];
     for (AutoPlayTableViewCell *cell in self.observer) {
         [self.tableView removeObserver:cell forKeyPath:@"contentOffset"];
-        [cell.player pause];
+//        [cell.player pause];
         
     }
 }

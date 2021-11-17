@@ -115,14 +115,24 @@
 }
 
 - (void)processRequestList {
-    NSMutableArray * finishRequestList = [NSMutableArray array];
-    NSLog(@"服务器返回数据，执行代理方法，执行代理方法的子方法  %@",@(self.requestList.count));
-    for (AVAssetResourceLoadingRequest * loadingRequest in self.requestList) {
-        if ([self finishLoadingWithLoadingRequest:loadingRequest]) {
-            [finishRequestList addObject:loadingRequest];
+    @synchronized (self) {
+        NSArray *reqList = [self.requestList copy];
+        for (AVAssetResourceLoadingRequest * loadingRequest in reqList) {
+            if ([self finishLoadingWithLoadingRequest:loadingRequest]) {
+                [self.requestList removeObject:loadingRequest];
+            }
         }
+        
+        
+//        NSMutableArray * finishRequestList = [NSMutableArray array];
+//        NSLog(@"服务器返回数据，执行代理方法，执行代理方法的子方法  %@",@(self.requestList.count));
+//        for (AVAssetResourceLoadingRequest * loadingRequest in self.requestList) {
+//            if ([self finishLoadingWithLoadingRequest:loadingRequest]) {
+//                [finishRequestList addObject:loadingRequest];
+//            }
+//        }
+//        [self.requestList removeObjectsInArray:finishRequestList];
     }
-    [self.requestList removeObjectsInArray:finishRequestList];
 }
 
 - (BOOL)finishLoadingWithLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest {

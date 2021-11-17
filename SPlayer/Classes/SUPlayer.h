@@ -31,6 +31,8 @@
 
 @property (nonatomic, assign) CGRect frame;
 
+@property (nonatomic, assign) CGFloat radius;
+
 /**
  *  初始化方法，url：歌曲的网络地址或者本地地址
  */

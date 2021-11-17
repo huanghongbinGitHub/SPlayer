@@ -40,7 +40,9 @@
     
     self.player = [[SUPlayer alloc] initWithURL:[NSURL URLWithString:url] withFrame:CGRectMake(10, 0, self.rectInSuper.size.width - 20, 290)];
     [self.player setSkin:YES];
+    self.player.radius = 15;
     [self.player addToSuperView:self.contentView];
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
@@ -85,7 +87,7 @@
     if (ofset.y + 92 <= self.rectInSuper.origin.y && self.rectInSuper.origin.y + self.rectInSuper.size.height <= ofset.y + 92 + height ) {
         //判断cell是否在window的0~400的高度范围内
         NSLog(@" 当前展示的 %@",self.identify);
-        self.backgroundColor = [UIColor redColor];
+//        self.backgroundColor = [UIColor redColor];
     }
 //        else{
 //        self.backgroundColor = randomColor;
@@ -93,9 +95,9 @@
 }
 
 
-//- (void)dealloc{
-//    NSLog(@"cell dealloc");
-//}
+- (void)dealloc{
+    NSLog(@"cell dealloc");
+}
 
 
 @end
