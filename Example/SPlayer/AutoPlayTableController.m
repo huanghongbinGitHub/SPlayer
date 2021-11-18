@@ -40,7 +40,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -63,10 +63,18 @@
 //        cell.backgroundColor = randomColor;
         cell.backgroundColor = [UIColor blackColor];
         [cell configPlayerWithUrl:[self data][indexPath.row]];
+        if (indexPath.row == 0) {
+    //        cell.player.muted = YES;
+            
+        }
+        if (indexPath.section != 0 || indexPath.row != 0) {
+            cell.player.type = SkinTypeWithOnlyPlayBtn;
+        }
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            [cell.player play];
+        }
     }
-    if (indexPath.row == 0) {
-        cell.player.muted = YES;
-    }
+    
     return cell;
 }
 

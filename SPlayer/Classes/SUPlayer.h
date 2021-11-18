@@ -33,6 +33,7 @@
 
 @property (nonatomic, assign) CGFloat radius;
 
+@property (nonatomic, assign) SkinType type;   //show {slider，forward，back}
 /**
  *  初始化方法，url：歌曲的网络地址或者本地地址
  */

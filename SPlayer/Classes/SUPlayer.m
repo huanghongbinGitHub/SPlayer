@@ -216,11 +216,10 @@
     if ([keyPath isEqualToString:@"rate"]) {
         if (self.player.rate == 0.0) {
             _state = SUPlayerStatePaused;
-            self.controlView.state = SUPlayerStatePaused;
         }else {
             _state = SUPlayerStatePlaying;
-            self.controlView.state = SUPlayerStatePlaying;
         }
+        self.controlView.state = _state;
     }
 }
 
@@ -376,6 +375,11 @@
             }
         }];
     }
+}
+
+- (void)setType:(SkinType)type{
+    _type = type;
+    self.controlView.type = type;
 }
 
 /// MARK: -------------view set get -----------

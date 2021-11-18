@@ -22,8 +22,44 @@
         [self addSubview:self.playBackBtn];
         [self addSubview:self.playForwardBtn];
         [self addSubview:self.playSlider];
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickSkin)];
+        self.playSlider.hidden = YES;
+        self.playForwardBtn.hidden = YES;
+        self.playBackBtn.hidden = YES;
+        [self addGestureRecognizer:recognizer];
     }
     return self;
+}
+
+- (void)setType:(SkinType)type{
+    _type = type;
+}
+
+- (void)clickSkin{
+    if (_type == SkinTypeWithAllView) {
+        self.playSlider.hidden = NO;
+        self.playForwardBtn.hidden = NO;
+        self.playBackBtn.hidden = NO;
+        self.playBtn.hidden = NO;
+    }
+    __weak SPlayerControlView *ws = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (ws.state == SUPlayerStatePlaying) {
+            ws.playSlider.hidden = YES;
+            ws.playBackBtn.hidden = YES;
+            ws.playForwardBtn.hidden = YES;
+            ws.playBtn.hidden = YES;
+        }
+    });
+}
+
+- (void)hiddenSkin{
+    if (self.state == SUPlayerStatePlaying) {
+        self.playSlider.hidden = YES;
+        self.playForwardBtn.hidden = YES;
+        self.playBackBtn.hidden = YES;
+        self.playBtn.hidden = YES;
+    }
 }
 
 - (UIButton *)playForwardBtn{
@@ -53,11 +89,11 @@
 - (UIButton *)playBtn{
     if (!_playBtn) {
         _playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _playBtn.bounds = CGRectMake(0, 0, 250, 40);
+        //        _playBtn.bounds = CGRectMake(0, 0, 250, 40);
         _playBtn.center = self.center;
         //        _playBtn.backgroundColor = kSystemYellowEFCE17Color;
-//        _playBtn.layer.cornerRadius = 20;
-//        _playBtn.layer.masksToBounds = YES;
+        //        _playBtn.layer.cornerRadius = 20;
+        //        _playBtn.layer.masksToBounds = YES;
         _playBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         //        [_playBtn setTitle:Locstr(@"开始") forState:UIControlStateNormal];
         //        [_playBtn setTitleColor:RKWhiteColor forState:UIControlStateNormal];
@@ -74,9 +110,20 @@
     NSLog(@"state %@",@(state));
     if (state == SUPlayerStatePaused) {
         [self.playBtn setImage:[ResourceLoader loadImageByName:@"播放"] forState:UIControlStateNormal];
+        if (_type == SkinTypeWithAllView) {
+            self.playSlider.hidden = NO;
+            self.playForwardBtn.hidden = NO;
+            self.playBackBtn.hidden = NO;
+            self.playBtn.hidden = NO;
+        }
+        else if (_type == SkinTypeWithOnlyPlayBtn){
+            self.playBtn.hidden = NO;
+        }
+        
     }
     else if (state == SUPlayerStatePlaying){
         [self.playBtn setImage:[ResourceLoader loadImageByName:@"pause"] forState:UIControlStateNormal];
+        [self performSelector:@selector(hiddenSkin) withObject:nil afterDelay:3];
     }
 }
 
@@ -130,21 +177,21 @@
 
 
 - (void)playForward:(UIButton *)sender{
-//    self.sliding = YES;
+    //    self.sliding = YES;
     if (self.playForward) {
         self.playForward(5.0f);
     }
 }
 
 - (void)playBack:(UIButton *)sender{
-//    self.sliding = YES;
+    //    self.sliding = YES;
     if (self.playBack) {
         self.playBack(5.0f);
     }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch  {
-
+    
     //点击的view的类名
     NSLog(@"%@", NSStringFromClass([touch.view class]));
     // UITableViewCellContentView就是点击了tableViewCell，则不截获点击事件

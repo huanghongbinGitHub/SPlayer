@@ -22,4 +22,11 @@ typedef NS_ENUM(NSInteger, SUPlayerState) {
 };
 
 
+typedef enum : NSInteger {
+    SkinTypeWithAllView,
+    SkinTypeWithOnlyPlayBtn
+
+}SkinType;
+
+
 #import "SPlayerSlider.h"

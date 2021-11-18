@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL sliding;
 
+@property (nonatomic, assign) SkinType type;   //show {slider，forward，back}
+
 //@property (nonatomic, assign) BOOL
 @property (nonatomic, copy) void (^playSliderToValue)(float value);
 
